@@ -1,0 +1,48 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shop-app
+    restart: unless-stopped
+    ports:
+      - '${APP_PORT}:3000'
+    environment:
+      DB_HOST: db
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    volumes:
+      - shop_logs:/app/logs
+    networks:
+      - shop_network
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:16.4
+    container_name: shop-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - '${DB_PORT}:5432' # Host:Container 내부 포트
+    volumes:
+      - shop_db_data:/var/lib/postgresql/data
+    networks:
+      - shop_network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER} -d ${DB_NAME}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  shop_db_data:
+  shop_logs:
+
+networks:
+  shop_network:
+    driver: bridge
