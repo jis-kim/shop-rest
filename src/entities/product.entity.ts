@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+
 import { BaseModel } from './base-model.entity';
 import { Brand } from './brand.entity';
 import { MemberTypePrice } from './member-type-price.entity';

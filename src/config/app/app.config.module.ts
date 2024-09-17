@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import appConfig from './app.config';
 import * as Joi from 'joi';
+
+import appConfig from './app.config';
 import { AppConfigService } from './app.config.service';
 
 @Module({

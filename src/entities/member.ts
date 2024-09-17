@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
+
 import { BaseModel } from './base-model.entity';
 import { MemberType } from './member-type.entity';
 

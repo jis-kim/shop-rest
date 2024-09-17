@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
+
 import databaseConfig from './database.config';
 import { DatabaseConfigService } from './database.config.service';
 
