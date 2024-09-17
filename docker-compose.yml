@@ -1,25 +1,25 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: shop-app
-    restart: unless-stopped
-    ports:
-      - '${APP_PORT}:3000'
-    environment:
-      DB_HOST: db
-      DB_PORT: ${DB_PORT}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
-    volumes:
-      - shop_logs:/app/logs
-    networks:
-      - shop_network
-    depends_on:
-      db:
-        condition: service_healthy
+  #app:
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile
+  #  container_name: shop-app
+  #  restart: unless-stopped
+  #  ports:
+  #    - '${APP_PORT}:3000'
+  #  environment:
+  #    DB_HOST: db
+  #    DB_PORT: ${DB_PORT}
+  #    DB_USER: ${DB_USER}
+  #    DB_PASSWORD: ${DB_PASSWORD}
+  #    DB_NAME: ${DB_NAME}
+  #  volumes:
+  #    - shop_logs:/app/logs
+  #  networks:
+  #    - shop_network
+  #  depends_on:
+  #    db:
+  #      condition: service_healthy
   db:
     image: postgres:16.4
     container_name: shop-db
