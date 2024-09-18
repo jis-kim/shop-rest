@@ -5,16 +5,16 @@ import { MemberType } from './member-type.entity';
 
 @Entity()
 export class Member extends BaseModel {
-  @Column('varchar', { length: 128 })
+  @Column({ type: 'varchar', length: 128 })
   name: string;
 
-  @Column('varchar', { length: 128 })
+  @Column({ type: 'varchar', length: 64, unique: true })
   username: string;
 
-  @Column('varchar', { length: 255 })
+  @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, select: false })
   password: string;
 
   @Column()

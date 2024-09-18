@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 
 import { BaseModel } from './base-model.entity';
-import { Member } from './member';
+import { Member } from './member.entity';
 import { MemberTypePrice } from './member-type-price.entity';
 
 @Entity()
