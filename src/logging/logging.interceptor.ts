@@ -24,17 +24,6 @@ export class LoggingInterceptor implements NestInterceptor {
 
           this.logger.log(`[${method}] ${url} ${statusCode} ${responseTime}ms`, 'APIInterceptor');
         },
-        error: (error) => {
-          const response: Response = context.switchToHttp().getResponse();
-          const statusCode = response.statusCode;
-          const responseTime = Date.now() - now;
-
-          this.logger.error(
-            `[${method}] ${url} ${error.status || statusCode} ${responseTime}ms - Error: ${error.message}\nrequest: ${JSON.stringify(request.body)}`,
-            error.stack,
-            'APIInterceptor',
-          );
-        },
       }),
     );
   }
