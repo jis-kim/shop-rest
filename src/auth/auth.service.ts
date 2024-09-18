@@ -1,9 +1,9 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Member } from 'src/entities/member.entity';
+import { Member } from '@/entities/member.entity';
 import { Repository } from 'typeorm';
 import { SignUpDto } from './dto/signup.dto';
-import { LoggingService } from 'src/logging/logging.service';
+import { LoggingService } from '@/logging/logging.service';
 import { hash } from 'bcrypt';
 import { SignUpResponseDto } from './dto/signup-response.dto';
 
@@ -50,7 +50,7 @@ export class AuthService {
         throw new ConflictException('이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.');
       }
       if (email === duplicatedUser.email) {
-        throw new ConflictException('이미 사용 중인 이메일주소 입니다. 다른 이메일 주소를 입력해주세요.');
+        throw new ConflictException('이미 사용 중인 이메일 주소 입니다. 다른 이메일 주소를 입력해주세요.');
       }
     }
   }
