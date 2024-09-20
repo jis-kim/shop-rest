@@ -13,6 +13,7 @@ import { MemberType } from './entities/member-type.entity';
 import { MemberTypePrice } from './entities/member-type-price.entity';
 import { Brand } from './entities/brand.entity';
 import { Product } from './entities/product.entity';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { Product } from './entities/product.entity';
     TypeOrmModule.forFeature([Member, MemberType, MemberTypePrice, Brand, Product]),
     LoggingModule,
     AuthModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

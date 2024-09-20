@@ -6,14 +6,9 @@ import { Request } from 'express';
 
 const BEARER_PREFIX = 'Bearer';
 
-export type MemberContext = {
-  isAuthenticated: boolean;
-  member?: TokenPayload;
-};
-
 @Injectable()
 export class MemberContextGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
@@ -26,7 +21,7 @@ export class MemberContextGuard implements CanActivate {
 
     try {
       const payload: TokenPayload = this.jwtService.verify(token);
-      request.memberContext = { isAuthenticated: true, member: payload };
+      request.memberContext = { isAuthenticated: true, payload };
     } catch {
       request.memberContext = { isAuthenticated: false };
     }

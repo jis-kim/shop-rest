@@ -1,5 +1,5 @@
 import 'express';
-import { MemberContext } from '../guard/member-context.guard';
+import { MemberContext } from '../../auth/guard/member-context.guard';
 
 declare module 'express' {
   interface Request {

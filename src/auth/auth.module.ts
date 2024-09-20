@@ -23,5 +23,6 @@ import { LoggingModule } from '@/logging/logging.module';
   ],
   controllers: [AuthController],
   providers: [AuthService],
+  exports: [JwtModule],
 })
 export class AuthModule {}
