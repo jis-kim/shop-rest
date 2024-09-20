@@ -59,7 +59,7 @@ export class AuthService {
     if (!isPasswordMatched) {
       throw new UnauthorizedException('비밀번호가 일치하지 않습니다. 비밀번호를 확인해주세요.');
     }
-    const token = this.jwtService.sign({ id: member.id, username: member.username, name: member.name });
+    const token = this.jwtService.sign({ sub: member.id, username: member.username, name: member.name });
     this.logger.log(`login success: { id: ${member.id}, username: ${member.username} }`, 'AuthService');
     return { accessToken: token };
   }

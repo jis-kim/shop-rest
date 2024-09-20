@@ -6,6 +6,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { hash } from 'bcrypt';
 import { ConflictException } from '@nestjs/common';
+import { access } from 'fs';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -110,6 +111,33 @@ describe('AuthService', () => {
       await expect(service.signUp(mockSignUpDto)).rejects.toThrow(
         new ConflictException('이미 사용 중인 이메일 주소 입니다. 다른 이메일 주소를 입력해주세요.'),
       );
+    });
+  });
+
+  describe('login', () => {
+    it('올바른 로그인 요청 시 로그인 성공', async () => {
+      const mockLoginDto = {
+        username: 'gildong',
+        password: '1234ABCabc',
+      };
+
+      const mockMember = {
+        id: '64cf0a61-b7c2-4347-ba94-bc854fd97f2f',
+        name: '홍길동',
+        username: 'gildong',
+        email: 'gildong@mock.com',
+        password: 'hashedPassword123',
+      };
+
+      mockMemberRepository.findOne.mockResolvedValue(mockMember);
+      (hash as jest.Mock) = jest.fn().mockResolvedValue('hashedPassword123');
+
+      const result = await service.login(mockLoginDto);
+      expect(result).toEqual({ accessToken: expect.any(String) });
+      expect(mockMemberRepository.findOne).toHaveBeenCalledWith({
+        select: ['id', 'name', 'username', 'email', 'password'],
+        where: { username: mockLoginDto.username },
+      });
     });
   });
 });
