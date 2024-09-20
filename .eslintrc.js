@@ -42,9 +42,9 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      node: {
-        moduleDirectory: ['node_modules', 'src'],
-        extensions: ['.js', '.ts'],
+      typescript: {
+        project: './tsconfig.json', // tsconfig 경로 설정
+        alwaysTryTypes: true,
       },
     },
   },

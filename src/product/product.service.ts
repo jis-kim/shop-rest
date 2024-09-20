@@ -1,11 +1,13 @@
-import { Product } from '@/entities/product.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { GetProductQueryDto } from './dto/get-product-query.dto';
 import { ProductInfo, ProductResponseDto } from './dto/product-response.dto';
-import { MemberContext } from '@/common/types/member-context.type';
+
 import { TokenPayload } from '@/auth/types/token-payload.type';
+import { MemberContext } from '@/common/types/member-context.type';
+import { Product } from '@/entities/product.entity';
 
 const MONDAY_DISCOUNT_RATE = 1;
 
@@ -143,9 +145,6 @@ export class ProductService {
     const now = new Date();
 
     const utcHours = now.getUTCHours();
-    // 현재의 UTC 시간을 한국 시간으로 변환 (UTC+9)
-    const koreaHours = (utcHours + 9) % 24;
-
     // UTC 날짜 기준으로 요일을 가져오고 필요시 하루를 더한다.
     const koreaDayOffset = utcHours + 9 >= 24 ? 1 : 0;
     return (now.getUTCDay() + koreaDayOffset) % 7;

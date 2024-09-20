@@ -1,4 +1,4 @@
-import { IsAlphanumeric, IsByteLength, IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsByteLength, IsString, Length } from 'class-validator';
 
 export class LoginDto {
   @Length(4, 64)

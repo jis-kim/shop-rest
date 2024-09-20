@@ -1,13 +1,15 @@
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Member } from '@/entities/member.entity';
-import { Repository } from 'typeorm';
-import { SignUpDto } from './dto/signup.dto';
-import { LoggingService } from '@/logging/logging.service';
-import { hash, compare } from 'bcrypt';
-import { SignUpResponseDto } from './dto/signup-response.dto';
-import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { hash, compare } from 'bcrypt';
+import { Repository } from 'typeorm';
+
+import { LoginDto } from './dto/login.dto';
+import { SignUpResponseDto } from './dto/signup-response.dto';
+import { SignUpDto } from './dto/signup.dto';
+
+import { Member } from '@/entities/member.entity';
+import { LoggingService } from '@/logging/logging.service';
 
 const SALT_ROUNDS = 10;
 

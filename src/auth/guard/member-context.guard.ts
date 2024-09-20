@@ -1,8 +1,9 @@
-import { TokenPayload } from '@/auth/types/token-payload.type';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Observable } from 'rxjs';
 import { Request } from 'express';
+import { Observable } from 'rxjs';
+
+import { TokenPayload } from '@/auth/types/token-payload.type';
 
 const BEARER_PREFIX = 'Bearer';
 

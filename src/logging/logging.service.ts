@@ -1,7 +1,8 @@
 import { Injectable, LoggerService as NestLoggerService } from '@nestjs/common';
-import { AppConfigService } from '@/config/app/app.config.service';
 import * as winston from 'winston';
 import * as DailyRotateFile from 'winston-daily-rotate-file';
+
+import { AppConfigService } from '@/config/app/app.config.service';
 
 const { combine, timestamp, printf, colorize, align } = winston.format;
 
